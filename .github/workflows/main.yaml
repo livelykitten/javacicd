@@ -1,0 +1,24 @@
+name: Gradle CI
+
+on:
+  push:
+    branches: [main]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v7
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      
+      - name: Setup gradle
+        uses: gradle/actions/setup-gradle@v6
+      
+      - name: Build and test
+        run: ./gradlew build
